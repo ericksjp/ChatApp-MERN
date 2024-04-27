@@ -4,15 +4,17 @@ import authRoutes from "./routes/auth.route.js";
 import connectToMongoDB from "./db/connectToMongoDB.js";
 
 const app = express();
-
-config();
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+config();
+
+app.use(express.json()); // for parsing application/json
 
 app.use("/api/auth", authRoutes);
+
+// app.get("/", (req, res) => {
+//   res.send("Hello World");
+// });
 
 app.listen(PORT, async () => {
   await connectToMongoDB();
