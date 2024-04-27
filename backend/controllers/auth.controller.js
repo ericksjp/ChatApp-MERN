@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 
 export const login = (req, res) => {
@@ -23,22 +24,29 @@ export const signup = async (req, res) => {
     const boyGirl = gender === "female" ? "girl" : "boy";
     const profilePic = `https://avatar.iran.liara.run/public/${boyGirl}?username=${username}`;
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     const newUser = new User({
       fullName,
       username,
-      password,
+      password: hashedPassword,
       gender,
       profilePic,
     });
 
-    await newUser.save();
+    if (newUser) {
+      await newUser.save();
 
-    res.status(201).json({
-      _id: newUser._id,
-      fullName: newUser.fullName,
-      username: newUser.username,
-      profilePic: newUser.profilePic,
-    });
+      res.status(201).json({
+        _id: newUser._id,
+        fullName: newUser.fullName,
+        username: newUser.username,
+        profilePic: newUser.profilePic,
+      });
+    } else {
+      res.status(400).json({ message: "Invalid user data" });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
