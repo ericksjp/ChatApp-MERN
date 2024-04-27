@@ -29,8 +29,19 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = (req, res) => {
-  console.log("Logout User");
+export const logout = (_, res) => {
+  try {
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production" ? true : false,
+    });
+
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 export const signup = async (req, res) => {
