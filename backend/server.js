@@ -1,5 +1,8 @@
 import express from "express";
 import { config } from "dotenv";
+import authRoutes from "./routes/auth.route.js";
+import connectToMongoDB from "./db/connectToMongoDB.js";
+
 const app = express();
 
 config();
@@ -9,4 +12,9 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.listen(PORT, console.log(`Server running on: http://localhost:${PORT}`));
+app.use("/api/auth", authRoutes);
+
+app.listen(PORT, async () => {
+  await connectToMongoDB();
+  console.log(`Server running on: http://localhost:${PORT}`);
+});
