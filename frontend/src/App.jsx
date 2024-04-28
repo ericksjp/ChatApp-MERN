@@ -1,7 +1,5 @@
-import "./App.css";
-
-function App() {
-  return <h1>oi</h1>;
+export default function App() {
+  return (
+    <div className="p-4 h-screen flex items-center justify-items-center"></div>
+  );
 }
-
-export default App;
