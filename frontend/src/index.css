@@ -9,3 +9,13 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+::-webkit-scrollbar {
+  cursor: pointer;
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: darkgrey;
+  border-radius: 4px;
+}
