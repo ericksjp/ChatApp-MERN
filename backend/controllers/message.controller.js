@@ -5,7 +5,7 @@ export const sendMessage = async (req, res) => {
   try {
     const { message } = req.body;
     const { id: receiverId } = req.params;
-    const senderId = req.user._id;
+    const senderId = req.user._id.toString();
 
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
@@ -30,6 +30,26 @@ export const sendMessage = async (req, res) => {
     await Promise.all([newMessage.save(), conversation.save()]);
 
     res.status(201).json(newMessage);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getMessages = async (req, res) => {
+  try {
+    const { id: receiverId } = req.params;
+    const senderId = req.user._id.toString();
+
+    const conversation = await Conversation.findOne({
+      participants: { $all: [senderId, receiverId] },
+    }).populate("messages");
+
+    if (!conversation) {
+      return res.status(200).json([]);
+    }
+
+    res.status(200).json(conversation.messages);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
