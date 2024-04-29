@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
 
 export default function useLogout() {
@@ -14,8 +15,10 @@ export default function useLogout() {
       });
       localStorage.removeItem("chat-user");
       setAuthUser(null);
+      toast.success("Logout successful");
     } catch (error) {
       console.error(error);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }

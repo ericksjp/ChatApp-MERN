@@ -14,26 +14,17 @@ export default function useSignup() {
 
     setLoading(true);
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/signup",
-        {
-          fullName: data.fullName,
-          username: data.username,
-          password: data.password,
-          confirmPassword: data.confirmPassword,
-          gender: data.gender,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-        },
-      );
+      const res = await axios.post("http://localhost:3000/api/auth/signup", {
+        fullName: data.fullName,
+        username: data.username,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        gender: data.gender,
+      });
 
       localStorage.setItem("chat-user", JSON.stringify(res.data));
-      console.log(res.headers);
       setAuthUser(res.data);
+      toast.success("Signup successful");
     } catch (error) {
       if (error.response?.data?.message)
         toast.error(error.response.data.message);
@@ -43,7 +34,7 @@ export default function useSignup() {
     }
   }
 
-  return {loading, signup};
+  return { loading, signup };
 }
 
 function handleInputErrors(data) {
