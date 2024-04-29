@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function SignUp() {
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
@@ -62,12 +64,12 @@ export default function SignUp() {
             </label>
           </div>
 
-          <a
-            href="#"
+          <Link
+            to="/login"
             className="text-sm text-blue-200 w-full text-center hover:underline hover:text-blue-500 mt-2 inline-block"
           >
             Already Have an account?
-          </a>
+          </Link>
           <button className="btn btn-block btn-sm mt-2 hover:bg-blue-700">
             SignUp
           </button>
