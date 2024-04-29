@@ -4,8 +4,6 @@ import { BsSend } from "react-icons/bs";
 export default function MessageInput() {
   const [isFocused, setIsFocused] = useState(false);
 
-  console.log(isFocused);
-
   return (
     <form
       className={`w-full bg-gray-700 flex flex-row items-center border-t border-collapse border-gray-${isFocused ? "300" : "600"}`}

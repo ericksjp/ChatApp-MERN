@@ -10,7 +10,7 @@ export default function useLogout() {
   async function logout() {
     setLoading(true);
     try {
-      await axios.post("http://localhost:3000/api/auth/logout", {
+      await axios.post("api/auth/logout", {
         withCredentials: true,
       });
       localStorage.removeItem("chat-user");
@@ -24,5 +24,5 @@ export default function useLogout() {
     }
   }
 
-  return {loading, logout};
+  return { loading, logout };
 }

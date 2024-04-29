@@ -13,7 +13,7 @@ export default function useLogin() {
     if (!localResult) return;
 
     try {
-      const resp = await axios.post("http://localhost:3000/api/auth/login", {
+      const resp = await axios.post("/api/auth/login", {
         username: data.username,
         password: data.password,
       });
