@@ -9,7 +9,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [gender, setGender] = useState("");
-  const [loading, signup] = useSignup();
+  const {loading, signup} = useSignup();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -105,8 +105,8 @@ export default function SignUp() {
           >
             Already Have an account?
           </Link>
-          <button className="btn btn-block btn-sm mt-2 hover:bg-blue-700">
-            SignUp
+          <button className="btn btn-block btn-sm mt-2 hover:bg-blue-700" disabled={loading}>
+            {loading ? <span className="loading loading-spinner" /> : "Sign Up"}
           </button>
         </form>
       </div>

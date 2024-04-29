@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 export default function useSignup() {
   const [loading, setLoading] = useState(false);
+  const { setAuthUser } = useContext(AuthContext);
 
   async function signup(data) {
     const localResult = handleInputErrors(data);
@@ -29,9 +31,9 @@ export default function useSignup() {
         },
       );
 
-      if (res.error) {
-        throw new Error(res.error);
-      }
+      localStorage.setItem("chat-user", JSON.stringify(res.data));
+      console.log(res.headers);
+      setAuthUser(res.data);
     } catch (error) {
       if (error.response?.data?.message)
         toast.error(error.response.data.message);
@@ -41,7 +43,7 @@ export default function useSignup() {
     }
   }
 
-  return [loading, signup];
+  return {loading, signup};
 }
 
 function handleInputErrors(data) {

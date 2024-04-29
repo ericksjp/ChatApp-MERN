@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import useLogout from "../../hooks/useLogout";
 
 export default function Modal() {
+  const {loading, logout} = useLogout();
   function handleClose() {
     document.getElementById("my_modal_3").close();
   }
@@ -18,9 +19,9 @@ export default function Modal() {
           Are you sure you wanna logout?
         </h3>
         <div className="modal-action">
-          <Link to="/login" className="btn btn-square">
-            Yes
-          </Link>
+          <button onClick={() => logout()} className="btn btn-square" disabled={loading}>
+            {loading ? <span className="loading loading-spinner" /> : "Yes"}
+          </button>
           <button className="btn btn-square" onClick={handleClose}>
             No
           </button>
