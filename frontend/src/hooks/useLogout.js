@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { AuthContext } from "../context/AuthContext";
+import useAuth from "../zustand/useAuth";
 
 export default function useLogout() {
   const [loading, setLoading] = useState(false);
-  const { setAuthUser } = useContext(AuthContext);
+  const { setAuth } = useAuth();
 
   async function logout() {
     setLoading(true);
@@ -14,7 +14,7 @@ export default function useLogout() {
         withCredentials: true,
       });
       localStorage.removeItem("chat-user");
-      setAuthUser(null);
+      setAuth(null);
       toast.success("Logout successful");
     } catch (error) {
       console.error(error);

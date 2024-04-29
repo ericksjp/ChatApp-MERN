@@ -15,7 +15,8 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid username or password" });
     }
 
-    generateTokenAndSetCookie(user._id, res);
+    const token = generateTokenAndSetCookie(user._id, res);
+    console.log("Token: ", token);
 
     res.status(200).json({
       _id: user._id,
@@ -46,15 +47,16 @@ export const logout = (_, res) => {
 
 export const signup = async (req, res) => {
   try {
-    const { fullName, username, password, comfirmPassword, gender } = req.body;
+    const { fullName, username, password, confirmPassword, gender } = req.body;
 
-    if (password !== comfirmPassword) {
+    if (password !== confirmPassword) {
       return res.status(400).json({ message: "Password does not match" });
     }
 
     const user = await User.findOne({ username });
 
     if (user) {
+      console.log("User already exists");
       return res.status(400).json({ message: "Username already exists" });
     }
 

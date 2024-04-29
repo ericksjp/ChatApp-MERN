@@ -1,13 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import Header from "./Header";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 import NoChatSelected from "./NoChatSelected";
-import { SelectedContext } from "../../context/SelectedContext";
+import useConversation from "../../zustand/useConversation";
 
 export default function MessageContainer() {
-  const { selectedConversation, setSelectedConversation } =
-    useContext(SelectedContext);
+  const { selectedConversation, setSelectedConversation } = useConversation();
+
   useEffect(() => {
     return () => {
       setSelectedConversation(null);
