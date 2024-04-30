@@ -1,17 +1,31 @@
-export default function Message() {
+/* eslint-disable react/prop-types */
+import getHourMinute from "../../utils/dateFormatter";
+import useAuth from "../../zustand/useAuth";
+import useConversation from "../../zustand/useConversation";
+
+export default function Message({ message }) {
+  const { auth } = useAuth();
+  const { selectedConversation } = useConversation();
+  const fromMe = message.senderId === auth._id;
+  const className = fromMe ? "chat-end" : "chat-start";
+  const profilePic = fromMe
+    ? auth.profilePic
+    : selectedConversation?.profilePic;
+  const bgColor = fromMe ? "bg-blue-500" : "";
+  const hour = getHourMinute(message.createdAt);
+
   return (
-    <div className="chat chat-end">
+    <div className={`chat ${className}`}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
-          <img
-            alt="chat component"
-            src="https://png.pngtree.com/png-clipart/20210915/ourlarge/pngtree-avatar-placeholder-abstract-white-blue-green-png-image_3918476.jpg"
-          />
+          <img alt="chat component" src={profilePic} />
         </div>
       </div>
-      <div className="chat-bubble text-white bg-blue-500">hi! what is upp?</div>
+      <div className={`chat-bubble max-w-[370px] ${bgColor}`}>
+        <p className="text break-words text-white">{message.message}</p>
+      </div>
       <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">
-        12:42
+        {hour}
       </div>
     </div>
   );

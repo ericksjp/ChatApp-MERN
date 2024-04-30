@@ -2,8 +2,10 @@
 import { create } from "zustand";
 
 const useAuth = create((set) => ({
-  auth: null,
-  setAuth: (auth) => set({ auth }),
+  auth: JSON.parse(localStorage.getItem("chat-user")),
+  setAuth: (auth) => {
+    set({ auth });
+  },
 }));
 
 export default useAuth;
