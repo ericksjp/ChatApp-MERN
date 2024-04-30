@@ -1,10 +1,13 @@
 // import { useState } from "react";
 // import useSelectedConversation from "../../hooks/useSelectedConversation";
+import useSocketContext from "../../hooks/useSocketContext";
 import useConversation from "../../zustand/useConversation";
 
 /* eslint-disable react/prop-types */
 export default function Conversation({ conversation, emoji, last }) {
   const { selectedConversation, setSelectedConversation } = useConversation();
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(conversation._id);
 
   const isSelected = selectedConversation?._id === conversation._id;
 
@@ -14,7 +17,7 @@ export default function Conversation({ conversation, emoji, last }) {
         className={`flex gap-2 items-center hover:bg-sky-600 p-2 py-1 cursor-pointer rounded ${isSelected ? "bg-sky-600" : ""}`}
         onClick={() => setSelectedConversation(conversation)}
       >
-        <div className="avatar online">
+        <div className={`avatar ${isOnline ? "online" : ""}`}>
           <div className="w-12 rounded-full">
             <img
               src={conversation.profilePic}

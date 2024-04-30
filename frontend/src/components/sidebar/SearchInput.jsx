@@ -14,9 +14,6 @@ export default function SearchInput() {
     if (search.length < 3)
       return toast.error("Search query must have at least 3 characteres");
 
-    console.log("here");
-    console.log(test);
-
     const conversation = test.find((c) =>
       c.fullName.toLowerCase().includes(search.toLowerCase()),
     );
