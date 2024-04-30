@@ -17,7 +17,7 @@ export default function MessageInput() {
 
   return (
     <form
-      className={`w-full bg-gray-700 flex flex-row items-center border-t border-collapse border-gray-${isFocused ? "300" : "600"}`}
+      className={`w-full bg-gray-700 flex flex-row items-center rounded-br-lg border-collapse border-gray-${isFocused ? "300" : "600"}`}
       onSubmit={handleSubmit}
     >
       <input

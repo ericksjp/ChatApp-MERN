@@ -1,10 +1,12 @@
 // import { useState } from "react";
 // import useSelectedConversation from "../../hooks/useSelectedConversation";
+import { useState } from "react";
 import useSocketContext from "../../hooks/useSocketContext";
 import useConversation from "../../zustand/useConversation";
 
 /* eslint-disable react/prop-types */
 export default function Conversation({ conversation, emoji, last }) {
+  const [imageLoad, setImageLoad] = useState(false);
   const { selectedConversation, setSelectedConversation } = useConversation();
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(conversation._id);
@@ -22,12 +24,12 @@ export default function Conversation({ conversation, emoji, last }) {
             <img
               src={conversation.profilePic}
               alt="user picture"
-              // onLoad={() => setImageLoad(true)}
-              // style={{ display: imageLoad ? "block" : "none" }}
+              onLoad={() => setImageLoad(true)}
+              style={{ display: imageLoad ? "block" : "none" }}
             />
-            {/* {!imageLoad && ( */}
-            {/*   <span className="loading loading-spinner mt-2 ml-2" /> */}
-            {/* )} */}
+            {!imageLoad && (
+              <span className="loading loading-spinner mt-2 ml-2" />
+            )}
           </div>
         </div>
         <div className="flex w-full gap-3 justify-between">

@@ -10,6 +10,8 @@ export default function useGetMessages() {
   useEffect(() => {
     async function getMessages() {
       setLoading(true);
+      if (!selectedConversation._id) return;
+
       try {
         const resp = await axios.get(
           `/api/messages/${selectedConversation._id}`,
@@ -22,8 +24,8 @@ export default function useGetMessages() {
         setLoading(false);
       }
     }
-    if (selectedConversation?._id) getMessages();
-  }, [selectedConversation?._id, setMessages]);
+    if (selectedConversation) getMessages();
+  }, [selectedConversation, setMessages]);
 
   return { loading, messages };
 }

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import useGetMessages from "../../hooks/useGetMessages";
 import useListeningMessages from "../../hooks/useListeningMessages";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
@@ -5,14 +6,25 @@ import Message from "./Message";
 
 export default function Messages() {
   const { loading, messages } = useGetMessages();
+  const lastMessageRef = useRef();
   useListeningMessages();
+
+  useEffect(() => {
+    if (!loading && lastMessageRef.current)
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
 
   return (
     <div className="px-3 flex-1 overflow-auto">
       {!loading &&
         messages.length > 0 &&
-        messages.map((message) => (
-          <Message message={message} key={message._id} />
+        messages.map((message, index) => (
+          <div
+            key={message._id}
+            ref={index === messages.length - 1 ? lastMessageRef : null}
+          >
+            <Message message={message} />
+          </div>
         ))}
 
       {loading && (

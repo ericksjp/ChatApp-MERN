@@ -5,7 +5,7 @@ import useAuth from "../zustand/useAuth";
 
 export default function useLogout() {
   const [loading, setLoading] = useState(false);
-  const { setAuth } = useAuth();
+  const { deleteAuth } = useAuth();
 
   async function logout() {
     setLoading(true);
@@ -13,8 +13,7 @@ export default function useLogout() {
       await axios.post("api/auth/logout", {
         withCredentials: true,
       });
-      localStorage.removeItem("chat-user");
-      setAuth(null);
+      deleteAuth();
       toast.success("Logout successful");
     } catch (error) {
       console.error(error);

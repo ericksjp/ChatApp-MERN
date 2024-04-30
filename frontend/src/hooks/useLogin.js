@@ -18,7 +18,6 @@ export default function useLogin() {
         password: data.password,
       });
 
-      localStorage.setItem("chat-user", JSON.stringify(resp.data));
       setAuth(resp.data);
       toast.success("Login successful");
     } catch (error) {
