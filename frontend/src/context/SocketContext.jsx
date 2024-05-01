@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from "react";
 import useAuth from "../zustand/useAuth";
 import io from "socket.io-client";
@@ -33,7 +32,7 @@ export function SocketProvider({ children }) {
         setSocket(null);
       }
     }
-  }, [auth]);
+  }, [auth, socket]);
 
   return (
     <SocketContext.Provider value={{ socket, onlineUsers }}>

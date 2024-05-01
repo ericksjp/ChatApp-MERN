@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import getHourMinute from "../../utils/dateFormatter";
 import useAuth from "../../zustand/useAuth";
 import useConversation from "../../zustand/useConversation";

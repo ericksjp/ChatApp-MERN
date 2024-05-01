@@ -1,11 +1,8 @@
-// import { useState } from "react";
-// import useSelectedConversation from "../../hooks/useSelectedConversation";
 import { useState } from "react";
 import useSocketContext from "../../hooks/useSocketContext";
 import useConversation from "../../zustand/useConversation";
 import getRandomEmoji from "../../utils/emoji";
 
-/* eslint-disable react/prop-types */
 export default function Conversation({ conversation, last }) {
   const [emoji] = useState(getRandomEmoji());
   const [imageLoad, setImageLoad] = useState(false);
