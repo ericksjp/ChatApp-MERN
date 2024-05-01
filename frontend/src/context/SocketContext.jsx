@@ -11,19 +11,19 @@ export function SocketProvider({ children }) {
 
   useEffect(() => {
     if (auth) {
-      const socket = io("http://localhost:3000", {
+      const newSocket = io("http://localhost:5000", {
         query: {
           userId: auth._id,
         },
       });
-      setSocket(socket);
+      setSocket(newSocket);
 
-      socket.on("getOnlineUsers", (users) => {
+      newSocket.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
       });
 
       return () => {
-        socket.close();
+        newSocket.close();
         setSocket(null);
       };
     } else {
@@ -32,7 +32,8 @@ export function SocketProvider({ children }) {
         setSocket(null);
       }
     }
-  }, [auth, socket]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
 
   return (
     <SocketContext.Provider value={{ socket, onlineUsers }}>
