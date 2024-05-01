@@ -11,7 +11,7 @@ export function SocketProvider({ children }) {
 
   useEffect(() => {
     if (auth) {
-      const newSocket = io("http://localhost:5000", {
+      const newSocket = io("https://chatapp-mern-77vj.onrender.com", {
         query: {
           userId: auth._id,
         },
