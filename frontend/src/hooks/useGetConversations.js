@@ -9,7 +9,7 @@ export default function useGetConversations() {
   useEffect(() => {
     async function getConversations() {
       try {
-        const resp = await axios.get("/api/users");
+        const resp = await axios.get("/api/users?excludeSelf");
         setConversations(resp.data);
       } catch (error) {
         console.error(error);

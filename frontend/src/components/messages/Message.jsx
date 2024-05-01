@@ -15,7 +15,7 @@ export default function Message({ message }) {
   const hour = getHourMinute(message.createdAt);
 
   return (
-    <div className={`chat ${className}`}>
+    <div className={`chat ${className} ${message.shake ? "shake" : ""}`}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           <img alt="chat component" src={profilePic} />

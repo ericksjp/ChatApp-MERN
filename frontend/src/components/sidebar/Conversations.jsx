@@ -14,7 +14,6 @@ export default function Conversations() {
             <Conversation
               key={conversation._id}
               conversation={conversation}
-              emoji={"🤖"}
               last={index === test.length - 1}
             />
           ))}
