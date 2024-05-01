@@ -9,7 +9,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [gender, setGender] = useState("");
-  const {loading, signup} = useSignup();
+  const { loading, signup } = useSignup();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -56,7 +56,7 @@ export default function SignUp() {
             <span className="text-base label-text text-blue-300">Password</span>
           </label>
           <input
-            type="text"
+            type="password"
             placeholder="Enter Password"
             className="w-full input input-bordered h-10"
             value={password}
@@ -69,7 +69,7 @@ export default function SignUp() {
             </span>
           </label>
           <input
-            type="text"
+            type="password"
             placeholder="Confirm Password"
             className="w-full input input-bordered h-10"
             value={confirmPassword}
@@ -84,7 +84,7 @@ export default function SignUp() {
                 className="checkbox checkbox-sm border-gray-400"
                 value="male"
                 checked={gender === "male"}
-                onChange={e => setGender(e.target.value)}
+                onChange={(e) => setGender(e.target.value)}
               />
             </label>
             <label className="flex items-center gap-x-2 text-blue-300">
@@ -94,7 +94,7 @@ export default function SignUp() {
                 value="female"
                 className="checkbox checkbox-sm border-gray-400"
                 checked={gender === "female"}
-                onChange={e => setGender(e.target.value)}
+                onChange={(e) => setGender(e.target.value)}
               />
             </label>
           </div>
@@ -105,7 +105,10 @@ export default function SignUp() {
           >
             Already Have an account?
           </Link>
-          <button className="btn btn-block btn-sm mt-2 hover:bg-blue-700" disabled={loading}>
+          <button
+            className="btn btn-block btn-sm mt-2 hover:bg-blue-700"
+            disabled={loading}
+          >
             {loading ? <span className="loading loading-spinner" /> : "Sign Up"}
           </button>
         </form>

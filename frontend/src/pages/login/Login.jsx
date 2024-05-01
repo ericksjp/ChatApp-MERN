@@ -35,7 +35,7 @@ export default function Login() {
             <span className="text-base label-text text-blue-300">Password</span>
           </label>
           <input
-            type="text"
+            type="password"
             placeholder="Enter Password"
             className="w-full input input-bordered h-10"
             value={password}
@@ -48,7 +48,10 @@ export default function Login() {
           >
             {"Don't"} have an account?
           </Link>
-          <button className="btn btn-block btn-sm mt-2 hover:bg-blue-700" disabled={loading}>
+          <button
+            className="btn btn-block btn-sm mt-2 hover:bg-blue-700"
+            disabled={loading}
+          >
             {loading ? <span className="spinner loading-spinner" /> : "Log In"}
           </button>
         </form>
